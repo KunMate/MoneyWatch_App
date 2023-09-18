@@ -2,10 +2,31 @@ package com.pack.moneywatch_app
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import com.pack.moneywatch_app.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding : ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        replaceFragment(Balance())
+        binding.bottomNavigationView.setOnItemSelectedListener(){
+            when(it.itemId){
+                R.id.balance -> replaceFragment(Balance())
+                R.id.goals -> replaceFragment(Goals())
+                R.id.shopassistant -> replaceFragment(ShopAssistant())
+                else -> {}
+            }
+            true
+        }
+    }
+    private fun replaceFragment(fragment : Fragment){
+        val FragmentManager = supportFragmentManager
+        val fragmentTransaction = FragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.MainFrameLayout, fragment)
+        fragmentTransaction.commit()
     }
 }
