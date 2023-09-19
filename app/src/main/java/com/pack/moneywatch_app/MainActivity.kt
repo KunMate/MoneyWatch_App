@@ -2,6 +2,7 @@ package com.pack.moneywatch_app
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Window
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.pack.moneywatch_app.databinding.ActivityMainBinding
@@ -10,10 +11,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.hide()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         replaceFragment(Balance())
-        binding.bottomNavigationView.setOnItemSelectedListener(){
+        binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.balance -> replaceFragment(Balance())
                 R.id.goals -> replaceFragment(Goals())
