@@ -1,60 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/shoplinearlayout"
-    android:orientation="vertical"
-    android:background="@color/backgrnd"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context=".ShopAssistant">
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:orientation="horizontal"
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/idRVItems"
+        tools:listitem="@layout/shoplist_rv_item"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"/>
 
-        <EditText
-            android:id="@+id/shopItemName"
-            android:layout_width="164dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:hint="tárgy neve"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/shopAmount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:ems="5"
-            android:hint="Mennyiség"
-            android:inputType="numberDecimal"
-            android:minHeight="48dp"
-            app:layout_constraintStart_toEndOf="@+id/shopItemName"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/shopPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:ems="4"
-            android:hint="Ár"
-            android:inputType="number"
-            android:minHeight="48dp"
-            app:layout_constraintStart_toEndOf="@+id/shopAmount"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <Button
-        android:id="@+id/shopnewitem"
-        android:layout_width="match_parent"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Új tárgy" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="20dp"
+        android:id="@+id/idFABAdd"
+        android:src="@drawable/ic_add"
+        android:backgroundTint="@color/purple_200"
+        />
 
-</LinearLayout>
+
+</RelativeLayout>
