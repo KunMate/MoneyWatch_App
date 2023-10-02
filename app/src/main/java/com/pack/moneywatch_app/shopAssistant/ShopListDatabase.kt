@@ -1,4 +1,4 @@
-package com.pack.moneywatch_app
+package com.pack.moneywatch_app.shopAssistant
 
 import android.content.Context
 import androidx.room.Database
@@ -25,6 +25,6 @@ abstract class ShopListDatabase : RoomDatabase() {
                 context.applicationContext,
                 ShopListDatabase::class.java,
                 "shoplist.db"
-            ).build()
+            ).allowMainThreadQueries().build()
     }
 }

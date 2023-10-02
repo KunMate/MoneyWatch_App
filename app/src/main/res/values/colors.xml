@@ -14,5 +14,7 @@
     <color name="green_bright30">#FF70E000</color>
     <color name="green_bright60">#FF9EF01A</color>
     <color name="green_bright100">#FFCCFF33</color>
-    <color name="backgrnd">#d9d9d9</color>
+    <color name="blue_bright">#4E66EA</color>
+    <color name="blue_dark">#2F3E93</color>
+    <color name="backgrnd">#2B2B2B</color>
 </resources>

@@ -12,7 +12,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add item to cart"
+            android:text="Elem hozzáadása"
             android:textAlignment="center"
             android:gravity="center"
             android:textColor="@color/white"
@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 style="@style/TextInputEditTextTheme"
                 android:layout_margin="5dp"
-                android:hint="Enter item name"
+                android:hint="Elem neve"
                 android:padding="5dp"
                 android:textColorHint="@color/white"
                 app:hintTextColor="@color/white"
@@ -55,20 +55,22 @@
                 android:layout_height="wrap_content"
                 style="@style/TextInputEditTextTheme"
                 android:layout_margin="5dp"
-                android:hint="Enter quantity"
+                android:hint="Mennyiség"
                 android:padding="5dp"
                 android:textColorHint="@color/white"
+
                 app:hintTextColor="@color/white"
                 >
+
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/idEditItemAmount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/idEditItemAmount"
                     android:layout_margin="5dp"
-                    android:inputType="number"
+                    android:inputType="number|numberDecimal"
                     android:textColor="@color/white"
                     android:textColorHint="@color/white"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
@@ -76,7 +78,7 @@
                 android:layout_height="wrap_content"
                 style="@style/TextInputEditTextTheme"
                 android:layout_margin="5dp"
-                android:hint="Enter price"
+                android:hint="Ár"
                 android:padding="5dp"
                 android:textColorHint="@color/white"
                 app:hintTextColor="@color/white"
@@ -106,7 +108,7 @@
                     android:layout_weight="1"
                     android:layout_margin="8dp"
                     android:id="@+id/idBtnCancel"
-                    android:text="Cancel"
+                    android:text="Mégse"
                     android:background="@drawable/custom_button_back" />
 
                 <Button
@@ -115,7 +117,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_margin="8dp"
-                    android:text="Add"
+                    android:text="Hozzáad"
                     android:background="@drawable/custom_button_back" />
 
             </LinearLayout>

@@ -1,4 +1,4 @@
-package com.pack.moneywatch_app
+package com.pack.moneywatch_app.shopAssistant
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

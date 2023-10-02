@@ -4,25 +4,96 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ShopAssistant">
+    android:background="@color/backgrnd"
+    tools:context=".shopAssistant.ShopAssistant">
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/idRVItems"
         tools:listitem="@layout/shoplist_rv_item"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60dp"
+        android:layout_marginTop="90dp"
+        />
+
+
+    <TextView
+        android:id="@+id/shopassistanttitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Bevásárlólistám"
+        android:textSize="32sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginRight="60dp"
+        android:weightSum="9"
+        android:padding="8dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:layout_marginStart="10dp"
+            android:layout_weight="2.75"
+            android:textSize="12sp"
+            android:text="Termék"
+            android:layout_alignParentStart="true" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:layout_marginStart="10dp"
+            android:textSize="12sp"
+            android:layout_weight="3.15"
+            android:text="Mennyiség"
+            android:layout_alignParentStart="true" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:layout_marginStart="10dp"
+            android:layout_weight="4"
+            android:textSize="12sp"
+            android:text="Ár"
+            android:layout_alignParentStart="true" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/idlistsum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="start"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        tools:text="15151 Ft" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/idFABAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_margin="20dp"
-        android:id="@+id/idFABAdd"
-        android:src="@drawable/ic_add"
-        android:backgroundTint="@color/purple_200"
-        />
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="4dp"
+        android:backgroundTint="@color/blue_dark"
+        android:src="@drawable/ic_add" />
 
 
 </RelativeLayout>
