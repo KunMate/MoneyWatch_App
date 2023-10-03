@@ -17,19 +17,14 @@ import org.w3c.dom.Text
 import kotlin.math.roundToInt
 
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ShopAssistant.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ShopAssistant : Fragment(), ShopListRVAdapter.ShopListItemClickInterface {
 
-    lateinit var shopItemsRV: RecyclerView
-    lateinit var shopAddFAB: FloatingActionButton
-    lateinit var shopList: List<ShopListItems>
-    lateinit var shopListViewModel: ShopListViewModel
-    lateinit var shopListRVAdapter: ShopListRVAdapter
-    lateinit var shopSum : TextView
+    private lateinit var shopItemsRV: RecyclerView
+    private lateinit var shopAddFAB: FloatingActionButton
+    private lateinit var shopList: List<ShopListItems>
+    private lateinit var shopListViewModel: ShopListViewModel
+    private lateinit var shopListRVAdapter: ShopListRVAdapter
+    private lateinit var shopSum : TextView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -106,7 +101,7 @@ class ShopAssistant : Fragment(), ShopListRVAdapter.ShopListItemClickInterface {
         shopListViewModel.delete(shopListItems)
         shopListRVAdapter.notifyDataSetChanged()
         updateSum()
-        Toast.makeText(requireContext(), "Item deleted", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), "Termék eltávolítva", Toast.LENGTH_SHORT).show()
     }
 
     fun updateSum(){

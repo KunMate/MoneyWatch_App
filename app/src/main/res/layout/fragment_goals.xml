@@ -11,6 +11,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textColor="@color/black"
-        android:text="goals fragment" />
+        android:text="bruh" />
 
 </FrameLayout>

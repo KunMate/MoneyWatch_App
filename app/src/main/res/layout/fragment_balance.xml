@@ -1,110 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/backgrnd"
-    android:layout_width="409dp"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:fillViewport="true">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
+        android:id="@+id/idBalanceLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".Balance">
+        android:orientation="vertical"
+        android:background="@color/backgrnd">
 
         <TextView
-            android:id="@+id/balanceTitle"
+            android:id="@+id/idMainBalanceText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="16dp"
-            android:text="Egyenlegem"
-            android:textSize="30dp"
+            android:text="Egyenleg"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.05"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:textSize="40dp"/>
 
         <TextView
-            android:id="@+id/balanceRemBalText"
+            android:id="@+id/idBalanceRemaining"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
-            android:text="Fennmaradó egyenleg:"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/balanceTitle"
-            app:layout_constraintTop_toBottomOf="@+id/balanceTitle" />
-
-        <TextView
-            android:id="@+id/balanceLeft"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:text="404 Ft"
-            android:textColor="@color/green_nat"
-            android:textSize="40sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/balanceRemBalText" />
+            android:textSize="32sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:textStyle="bold"/>
+    </LinearLayout>
 
-        <TextView
-            android:id="@+id/balanceEveryDayLifeText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:text="Mindennapi élet"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/balanceRemBalText"
-            app:layout_constraintTop_toBottomOf="@+id/balanceRemBalText" />
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyleHorizontal"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/idBalanceSumCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/backgrnd"
+        android:layout_below="@id/idBalanceLayout"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="64dp"
-            android:max="100"
-            android:progress="8"
-            android:progressTint="@color/green_dark60"
-            android:scaleY="5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/balanceEveryDayLifeText"
-            app:layout_constraintTop_toBottomOf="@+id/balanceEveryDayLifeText" />
-
-        <TextView
-            android:id="@+id/balanceBalPercentLeft"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="8 %"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="@+id/progressBar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.25"
-            app:layout_constraintStart_toEndOf="@+id/progressBar"
-            app:layout_constraintTop_toTopOf="@+id/progressBar" />
+            android:background="@color/backgrnd"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/backgrnd"
+                android:layout_weight="0.5"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/idBalanceBudget"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="404 Ft"
+                    android:textStyle="bold"
+                    android:textSize="25sp"
+                    android:textColor="@color/green_nat"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Keret"
+                    android:textSize="14sp"/>
+            </LinearLayout> <!-- keret layout -->
 
-        <TextView
-            android:id="@+id/balanceEveryDayLifeBalance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="8dp"
-            android:textSize="16sp"
-            android:text="123 456 ft"
-            app:layout_constraintEnd_toEndOf="@+id/progressBar"
-            app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/backgrnd"
+                android:layout_weight="0.5"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/idBalanceExpense"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="200 Ft"
+                    android:textStyle="bold"
+                    android:textColor="@color/red"
+                    android:textSize="25sp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kiadás"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
-        <Button
-            android:id="@+id/placeholder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="500dp"
-            android:text="Placeholder useless button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/progressBar" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+    <TextView
+        android:id="@+id/idTextLatestActions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Legutóbbi mozgások"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:layout_below="@id/idBalanceSumCard"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/idBalanceRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/idTextLatestActions"
+        android:layout_margin="10dp"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/idBalanceAddTransactionBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="4dp"
+        android:src="@drawable/ic_add"
+        android:backgroundTint="@color/blue_dark"
+        />
+
+
+
+</RelativeLayout>
