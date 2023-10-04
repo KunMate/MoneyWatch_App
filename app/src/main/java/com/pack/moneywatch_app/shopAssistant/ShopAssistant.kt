@@ -86,7 +86,7 @@ class ShopAssistant : Fragment(), ShopListRVAdapter.ShopListItemClickInterface {
                     updateSum()
                     dialog.dismiss()
                 } else {
-                    Toast.makeText(requireContext(), "Nem elég adat", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Nincs elég adat", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: NumberFormatException) {
                 Toast.makeText(requireContext(), "Rossz szám adat", Toast.LENGTH_SHORT).show()

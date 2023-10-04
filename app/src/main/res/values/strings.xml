@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">MoneyWatch</string>
+    <string-array name="Categories">
+        <item>Mindennapi élet</item>
+        <item>Hobbi</item>
+        <item>Otthon</item>
+        <item>Szórakozás</item>
+        <item>Utazás</item>
+        <item>Egyéb</item>
+    </string-array>
 </resources>

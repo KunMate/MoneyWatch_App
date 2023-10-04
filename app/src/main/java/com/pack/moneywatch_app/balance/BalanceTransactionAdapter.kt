@@ -8,9 +8,9 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.pack.moneywatch_app.R
 
-class BalanceTransactionAdapter(private val transactions: ArrayList<BalanceTransaction>) : RecyclerView.Adapter<BalanceTransactionAdapter.BalanceTransactionViewHolder>() {
+class BalanceTransactionAdapter(private var transactions: List<BalanceTransaction>) : RecyclerView.Adapter<BalanceTransactionAdapter.BalanceTransactionViewHolder>() {
     class BalanceTransactionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val label : TextView = view.findViewById(R.id.idTransactionLabel)
+        val description : TextView = view.findViewById(R.id.idTransactionLabel)
         val amount : TextView = view.findViewById(R.id.idTransactionAmount)
     }
 
@@ -33,11 +33,14 @@ class BalanceTransactionAdapter(private val transactions: ArrayList<BalanceTrans
             holder.amount.text = transaction.amount.toString() + " Ft"
             holder.amount.setTextColor(ContextCompat.getColor(context, R.color.red))
         }
-        holder.label.text = transaction.label
+        holder.description.text = transaction.description
     }
 
     override fun getItemCount(): Int {
         return transactions.size
     }
-
+    fun setData(transactions: List<BalanceTransaction>){
+        this.transactions = transactions
+        notifyDataSetChanged()
+    }
 }
