@@ -1,8 +1,10 @@
 package com.pack.moneywatch_app.balance
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Spinner
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -34,6 +36,11 @@ class BalanceTransactionAdapter(private var transactions: List<BalanceTransactio
             holder.amount.setTextColor(ContextCompat.getColor(context, R.color.red))
         }
         holder.description.text = transaction.description
+        holder.itemView.setOnClickListener{
+            val intent = Intent(context, TransactionDetailsActivity::class.java)
+            intent.putExtra("transaction", transaction)
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {

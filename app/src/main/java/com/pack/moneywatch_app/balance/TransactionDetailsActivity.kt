@@ -4,24 +4,25 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import androidx.core.widget.addTextChangedListener
 import androidx.room.Room
 import com.pack.moneywatch_app.R
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class AddTransactionActivity : AppCompatActivity() {
-    private lateinit var addbtn: Button
+class TransactionDetailsActivity : AppCompatActivity() {
+    private lateinit var updateBtn: Button
     private lateinit var closeBtn: ImageButton
     private lateinit var nameInput: EditText
     private lateinit var amountInput: EditText
     private lateinit var categorySpinner: Spinner
-    private lateinit var captionText : EditText
+    private lateinit var captionText: EditText
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supportActionBar?.hide()
         val categories = resources.getStringArray(R.array.Categories)
-        setContentView(R.layout.activity_add_transaction)
-        addbtn = findViewById(R.id.idAddnewTransactionBtn)
+        setContentView(R.layout.activity_transaction_details)
+        supportActionBar?.hide()
+        updateBtn = findViewById(R.id.idAddnewTransactionBtn)
         closeBtn = findViewById(R.id.idTransactionCloseBtn)
         nameInput = findViewById(R.id.idNameInput)
         amountInput = findViewById(R.id.idAmountInput)
@@ -30,22 +31,39 @@ class AddTransactionActivity : AppCompatActivity() {
         val adapter =
             ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, categories)
         categorySpinner.adapter = adapter
-        categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        var transaction = intent.getSerializableExtra("transaction") as BalanceTransaction
+        nameInput.setText(transaction.description)
+        nameInput.addTextChangedListener{
+            updateBtn.visibility = View.VISIBLE
+        }
+        amountInput.setText(transaction.amount.toString())
+        amountInput.addTextChangedListener{
+            updateBtn.visibility = View.VISIBLE
+        }
+        //val spinnerPos = categories.indexOf(transaction.category.toString())
+        val spinnerPos = 1
+        if(spinnerPos == -1)
+            categorySpinner.setSelection(1)
+        else
+            categorySpinner.setSelection(spinnerPos)
+        categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
+        {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
                 position: Int,
                 id: Long
             ) {
-                // categories[position] = kivalasztott spinner
+                updateBtn.visibility = View.VISIBLE
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                // nem tortenhet ilyen
+                //nem tortenik meg
             }
-
         }
-        addbtn.setOnClickListener {
+        captionText.setText(transaction.expinfo)
+
+        updateBtn.setOnClickListener {
             val title = nameInput.text.toString()
             val description = captionText.text.toString()
             val selectedCategory = categorySpinner.isSelected.toString()
@@ -55,8 +73,9 @@ class AddTransactionActivity : AppCompatActivity() {
             try {
                 amount = amountInput.text.toString().toInt()
                 if (title.isNotEmpty()) {
-                    val transaction = BalanceTransaction(0, title, amount, selectedCategory, description)
-                    insert(transaction)
+                    val transaction =
+                        BalanceTransaction(transaction.id, title, amount, selectedCategory, description)
+                    update(transaction)
                 } else {
                     Toast.makeText(this, "Nincs elég adat", Toast.LENGTH_SHORT).show()
                 }
@@ -69,7 +88,7 @@ class AddTransactionActivity : AppCompatActivity() {
         }
     }
 
-    private fun insert(transaction: BalanceTransaction) {
+    private fun update(transaction: BalanceTransaction) {
         val balancedb = Room.databaseBuilder(
             this,
             BalanceDatabase::class.java,
@@ -77,7 +96,7 @@ class AddTransactionActivity : AppCompatActivity() {
         ).build()
 
         GlobalScope.launch {
-            balancedb.transactionDao().insertAll(transaction)
+            balancedb.transactionDao().update(transaction)
             finish()
         }
     }
