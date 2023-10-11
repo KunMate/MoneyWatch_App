@@ -8,7 +8,7 @@ import androidx.room.Update
 
 @Dao
 interface BalanceDao {
-    @Query("SELECT * FROM expenses")
+    @Query("SELECT * FROM expenses order by id desc")
     fun getAll(): List<BalanceTransaction>
 
     @Insert
