@@ -58,7 +58,7 @@ class AddTransactionActivity : AppCompatActivity() {
         addbtn.setOnClickListener {
             val title = nameInput.text.toString()
             val description = captionText.text.toString()
-            val selectedCategory = categorySpinner.isSelected.toString()
+            val selectedCategory = categories[categorySpinner.selectedItemId.toInt()]
             var amount: Int
             if (title.isEmpty())
                 Toast.makeText(this, "Adja meg a költés nevét", Toast.LENGTH_SHORT).show()

@@ -11,6 +11,9 @@ interface BalanceDao {
     @Query("SELECT * FROM expenses order by id desc")
     fun getAll(): List<BalanceTransaction>
 
+    @Query("SELECT * FROM expenses WHERE category = :selectedCategory order by id desc")
+    fun getCategoryType(selectedCategory : String) : List<BalanceTransaction>
+
     @Insert
     fun insertAll(vararg transaction: BalanceTransaction)
 

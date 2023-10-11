@@ -8,4 +8,13 @@
         <item>Utazás</item>
         <item>Fizetés</item>
     </string-array>
+    <string-array name="Categories_balance">
+        <item>Mindent mutat</item>
+        <item>Mindennapi élet</item>
+        <item>Hobbi</item>
+        <item>Otthon</item>
+        <item>Szórakozás</item>
+        <item>Utazás</item>
+        <item>Fizetés</item>
+    </string-array>
 </resources>
