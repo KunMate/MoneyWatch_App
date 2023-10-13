@@ -7,6 +7,7 @@ import android.widget.*
 import androidx.appcompat.widget.SwitchCompat
 import androidx.room.Room
 import com.pack.moneywatch_app.R
+import com.pack.moneywatch_app.shopAssistant.ShopListViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -18,6 +19,8 @@ class AddTransactionActivity : AppCompatActivity() {
     private lateinit var categorySpinner: Spinner
     private lateinit var captionText : EditText
     private lateinit var moneyTypeSwitch: SwitchCompat
+    private var startedFromShopList : Boolean = false
+    private lateinit var shopListViewModel: ShopListViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
@@ -32,6 +35,11 @@ class AddTransactionActivity : AppCompatActivity() {
         moneyTypeSwitch = findViewById(R.id.idAddMoneySwitch)
         val adapter =
             ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, categories)
+        try {
+            val cost = intent.getSerializableExtra("cost") as Int
+            amountInput.setText(cost.toString())
+            startedFromShopList = true
+        }catch(_: java.lang.NullPointerException){}
         categorySpinner.adapter = adapter
         categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
@@ -51,6 +59,7 @@ class AddTransactionActivity : AppCompatActivity() {
             }
 
         }
+
         moneyTypeSwitch.setOnClickListener{
             if(moneyTypeSwitch.isChecked)
                 categorySpinner.setSelection(5)
@@ -69,6 +78,10 @@ class AddTransactionActivity : AppCompatActivity() {
                 if (title.isNotEmpty()) {
                     val transaction = BalanceTransaction(0, title, amount, selectedCategory, description)
                     insert(transaction)
+                    if(startedFromShopList)
+                    {
+                        setResult(RESULT_OK)
+                    }
                 } else {
                     Toast.makeText(this, "Nincs elég adat", Toast.LENGTH_SHORT).show()
                 }

@@ -14,7 +14,7 @@
         tools:listitem="@layout/shoplist_rv_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="100dp"
         android:layout_marginTop="90dp"
         />
 
@@ -39,15 +39,16 @@
         android:layout_marginRight="60dp"
         android:weightSum="9"
         android:padding="8dp">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_alignParentStart="true"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="60dp"
             android:layout_weight="2.75"
-            android:textSize="12sp"
             android:text="Termék"
-            android:layout_alignParentStart="true" />
+            android:textSize="12sp" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -67,6 +68,17 @@
             android:text="Ár"
             android:layout_alignParentStart="true" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/idsaveToBalanceBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/idlistsum"
+        android:layout_marginTop="-46dp"
+        android:layout_marginBottom="45dp"
+        android:layout_marginStart="9dp"
+        android:text="Lista mentése" />
+
     <TextView
         android:id="@+id/idlistsum"
         android:layout_width="match_parent"

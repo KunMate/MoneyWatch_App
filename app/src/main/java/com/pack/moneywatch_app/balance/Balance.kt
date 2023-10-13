@@ -10,6 +10,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
@@ -29,7 +30,7 @@ class Balance : Fragment() {
     private lateinit var expense: TextView
     private lateinit var newItemBtn: FloatingActionButton
     private lateinit var balancedb: BalanceDatabase
-    private lateinit var typeSpinner : Spinner
+    private lateinit var typeSpinner: Spinner
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +42,7 @@ class Balance : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val categories = resources.getStringArray(R.array.Categories_balance)
-        var selectedCat : String
+        var selectedCat: String
         balanceRV = view.findViewById(R.id.idBalanceRecycler)
         balanceLeft = view.findViewById(R.id.idBalanceRemaining)
         budget = view.findViewById(R.id.idBalanceBudget)
@@ -52,7 +53,11 @@ class Balance : Fragment() {
         linearLayoutManager = LinearLayoutManager(requireContext())
         typeSpinner = view.findViewById(R.id.idBalanceSetTypeShow)
         val spinnerAdapter =
-            ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item, categories)
+            ArrayAdapter<String>(
+                requireContext(),
+                android.R.layout.simple_spinner_dropdown_item,
+                categories
+            )
         typeSpinner.adapter = spinnerAdapter
         balancedb = Room.databaseBuilder(
             requireContext(),
@@ -75,40 +80,18 @@ class Balance : Fragment() {
                 position: Int,
                 id: Long
             ) {
-                when(position){
+                when (position) {
                     0 -> fetchAll()
-                    1 -> {
-                        selectedCat = categories[typeSpinner.selectedItemId.toInt()]
-                        fetchCategory(selectedCat)
-                    }
-                    2 -> {
-                        selectedCat = categories[typeSpinner.selectedItemId.toInt()]
-                        fetchCategory(selectedCat)
-                    }
-                    3 -> {
-                        selectedCat = categories[typeSpinner.selectedItemId.toInt()]
-                        fetchCategory(selectedCat)
-                    }
-                    4 -> {
-                        selectedCat = categories[typeSpinner.selectedItemId.toInt()]
-                        fetchCategory(selectedCat)
-                    }
-                    5 -> {
-                        selectedCat = categories[typeSpinner.selectedItemId.toInt()]
-                        fetchCategory(selectedCat)
-                    }
-                    6 -> {
+                    else -> {
                         selectedCat = categories[typeSpinner.selectedItemId.toInt()]
                         fetchCategory(selectedCat)
                     }
                 }
-
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 // nem tortenhet ilyen
             }
-
         }
     }
 
@@ -121,7 +104,8 @@ class Balance : Fragment() {
             updateBoard()
         }
     }
-    private fun fetchCategory(category : String) {
+
+    private fun fetchCategory(category: String) {
         GlobalScope.launch {
             transactions = balancedb.transactionDao().getCategoryType(category)
             activity?.runOnUiThread {
@@ -144,5 +128,6 @@ class Balance : Fragment() {
         super.onResume()
         fetchAll()
         updateBoard()
+        typeSpinner.setSelection(0)
     }
 }

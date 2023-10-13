@@ -13,4 +13,6 @@ class ShopListViewModel(private val repository: ShopListRepository) : ViewModel(
     }
     fun getAllShopListItems() = repository.getAllItems()
     fun getTotalCost() = repository.getTotalCost()
+    fun getItemCount() = repository.getItemsCount()
+    fun wipeItems() = repository.wipeCart()
 }

@@ -9,6 +9,4 @@ data class BalanceTransaction(
     val description : String,
     val amount: Int,
     val category: String,
-    val expinfo: String) : java.io.Serializable {
-
-}
+    val expinfo: String) : java.io.Serializable

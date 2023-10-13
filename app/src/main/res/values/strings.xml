@@ -7,6 +7,7 @@
         <item>Szórakozás</item>
         <item>Utazás</item>
         <item>Fizetés</item>
+        <item>Megtakarítás</item>
     </string-array>
     <string-array name="Categories_balance">
         <item>Mindent mutat</item>
@@ -16,5 +17,6 @@
         <item>Szórakozás</item>
         <item>Utazás</item>
         <item>Fizetés</item>
+        <item>Megtakarítás</item>
     </string-array>
 </resources>

@@ -11,6 +11,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textColor="@color/black"
-        android:text="bruh" />
+        android:text="to be developed" />
 
 </FrameLayout>

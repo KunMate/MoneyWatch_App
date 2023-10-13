@@ -8,4 +8,6 @@ class ShopListRepository(private val db: ShopListDatabase) {
     suspend fun delete(items: ShopListItems) = db.getShopListDao().delete(items)
     fun getTotalCost() = db.getShopListDao().getTotalCost()
     fun getAllItems() = db.getShopListDao().getAllShopItems()
+    fun wipeCart() = db.getShopListDao().wipeCart()
+    fun getItemsCount() = db.getShopListDao().getItemsCount()
 }

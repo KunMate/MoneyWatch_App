@@ -17,4 +17,10 @@ interface ShopListDao {
     @Query("SELECT SUM (itemAmount * itemPrice) FROM shoplist_items")
     fun getTotalCost() : String
 
+    @Query("DELETE FROM shoplist_items")
+    fun wipeCart()
+
+    @Query("SELECT COUNT(id) from shoplist_items")
+    fun getItemsCount() : Int
+
 }

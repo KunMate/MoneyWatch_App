@@ -1,6 +1,8 @@
 package com.pack.moneywatch_app.shopAssistant
 
+import android.app.Activity
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,10 +11,12 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.pack.moneywatch_app.*
+import com.pack.moneywatch_app.balance.AddTransactionActivity
 import org.w3c.dom.Text
 import kotlin.math.roundToInt
 
@@ -25,6 +29,7 @@ class ShopAssistant : Fragment(), ShopListRVAdapter.ShopListItemClickInterface {
     private lateinit var shopListViewModel: ShopListViewModel
     private lateinit var shopListRVAdapter: ShopListRVAdapter
     private lateinit var shopSum : TextView
+    private lateinit var addToBalBtn : Button
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,6 +46,7 @@ class ShopAssistant : Fragment(), ShopListRVAdapter.ShopListItemClickInterface {
         shopListRVAdapter = ShopListRVAdapter(shopList, this)
         shopItemsRV.layoutManager = LinearLayoutManager(view.context)
         shopItemsRV.adapter = shopListRVAdapter
+        addToBalBtn = view.findViewById(R.id.idsaveToBalanceBtn)
         val shopListRepository = ShopListRepository(ShopListDatabase.invoke(requireContext()))
         val factory = ShopListViewModelFactory(shopListRepository)
         shopListViewModel = ViewModelProvider(this, factory)[ShopListViewModel::class.java]
@@ -53,6 +59,33 @@ class ShopAssistant : Fragment(), ShopListRVAdapter.ShopListItemClickInterface {
             openDialog()
         }
         updateSum()
+        addToBalBtn.setOnClickListener{
+            if(shopListViewModel.getItemCount() == 0)
+                Toast.makeText(requireContext(), "Üres listát nem lehet menteni", Toast.LENGTH_SHORT).show()
+            else {
+                val intent = Intent(requireContext(), AddTransactionActivity::class.java)
+                val sum = getSum()
+                intent.putExtra("cost", sum)
+                startActivityForResult(intent, 1)
+            }
+        }
+        val itemTouchHelper = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                shopListViewModel.delete(shopListRVAdapter.list[viewHolder.adapterPosition])
+                shopListRVAdapter.notifyItemRemoved(viewHolder.adapterPosition)
+                updateSum()
+            }
+        }
+        val swipeHelper = ItemTouchHelper(itemTouchHelper)
+        swipeHelper.attachToRecyclerView(shopItemsRV)
     }
 
     private fun openDialog() {
@@ -105,7 +138,30 @@ class ShopAssistant : Fragment(), ShopListRVAdapter.ShopListItemClickInterface {
     }
 
     fun updateSum(){
-        val sum = shopListViewModel.getTotalCost().toFloat().roundToInt()
+        val sum : Int
+        if(shopListViewModel.getItemCount() == 0)
+        {
+            sum = 0
+        }
+        else
+            sum = shopListViewModel.getTotalCost().toFloat().roundToInt()
         shopSum.text = sum.toString() + " Ft"
+    }
+    fun getSum() : Int{
+        val sum : Int
+        if(shopListViewModel.getItemCount() == 0)
+        {
+            sum = 0
+        }
+        else
+            sum = shopListViewModel.getTotalCost().toFloat().roundToInt()
+        return sum
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(resultCode == Activity.RESULT_OK){
+            shopListViewModel.wipeItems()
+        }
     }
 }

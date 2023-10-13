@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.shopassistant -> {
                     replaceFragment(ShopAssistant())
                 }
-                else -> {}
             }
             true
         }

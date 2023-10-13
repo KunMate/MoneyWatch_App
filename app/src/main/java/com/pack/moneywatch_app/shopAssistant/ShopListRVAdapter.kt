@@ -1,10 +1,12 @@
 package com.pack.moneywatch_app.shopAssistant
 
+import android.app.Dialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.pack.moneywatch_app.R
 import kotlin.math.roundToInt
@@ -41,6 +43,7 @@ class ShopListRVAdapter (var list: List<ShopListItems>,
         holder.deleteTV.setOnClickListener{
             shopListItemClickInterface.onItemClick(list[position])
         }
+
     }
 
     override fun getItemCount(): Int {
