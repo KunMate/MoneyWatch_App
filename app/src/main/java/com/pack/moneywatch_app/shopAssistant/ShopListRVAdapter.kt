@@ -1,18 +1,22 @@
 package com.pack.moneywatch_app.shopAssistant
 
 import android.app.Dialog
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import androidx.core.content.ContextCompat
 import com.pack.moneywatch_app.R
+import com.pack.moneywatch_app.balance.TransactionDetailsActivity
+import kotlin.coroutines.coroutineContext
 import kotlin.math.roundToInt
 
 class ShopListRVAdapter (var list: List<ShopListItems>,
-                         val shopListItemClickInterface: ShopListItemClickInterface)
+                         private val shopListItemClickInterface: ShopListItemClickInterface)
     : RecyclerView.Adapter<ShopListRVAdapter.ShopListViewHolder>() {
     inner class ShopListViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView){
         val nameTV = itemView.findViewById<TextView>(R.id.idTVItemName)
@@ -29,7 +33,9 @@ class ShopListRVAdapter (var list: List<ShopListItems>,
         fun onItemClick(shopListItems: ShopListItems)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShopListViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup,
+                                    viewType: Int
+    ): ShopListViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.shoplist_rv_item, parent, false)
         return ShopListViewHolder(view)
     }
@@ -43,7 +49,6 @@ class ShopListRVAdapter (var list: List<ShopListItems>,
         holder.deleteTV.setOnClickListener{
             shopListItemClickInterface.onItemClick(list[position])
         }
-
     }
 
     override fun getItemCount(): Int {

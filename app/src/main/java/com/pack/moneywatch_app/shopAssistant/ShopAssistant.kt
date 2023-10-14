@@ -50,11 +50,11 @@ class ShopAssistant : Fragment(), ShopListRVAdapter.ShopListItemClickInterface {
         val shopListRepository = ShopListRepository(ShopListDatabase.invoke(requireContext()))
         val factory = ShopListViewModelFactory(shopListRepository)
         shopListViewModel = ViewModelProvider(this, factory)[ShopListViewModel::class.java]
-        shopListViewModel.getAllShopListItems().observe(viewLifecycleOwner, Observer {
+        shopListViewModel.getAllShopListItems().observe(viewLifecycleOwner) {
             shopListRVAdapter.list = it
             shopListRVAdapter.notifyDataSetChanged()
             updateSum()
-        })
+        }
         shopAddFAB.setOnClickListener {
             openDialog()
         }

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="8dp"
+    android:backgroundTint="@color/blue_dark"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="5"
+            android:id="@+id/idLLSavingItem">
+            <TextView
+                android:id="@+id/idSavingItemName"
+                android:layout_width="8dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="Elem neve"
+                android:textColor="@color/white"
+                android:padding="4dp"
+                android:layout_margin="3dp"
+                />
+            <TextView
+                android:id="@+id/idSavingCost"
+                android:layout_width="8dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:text="Ár"
+                android:textColor="@color/white"
+                android:padding="4dp"
+                android:layout_margin="3dp"
+                />
+            <ImageView
+                android:layout_width="8dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:layout_margin="3dp"
+                android:src="@drawable/ic_baseline_delete_24"
+                android:id="@+id/idSavingDelete"
+                app:tint="@color/white"
+                />
+
+        </LinearLayout>
+
+        <SeekBar
+            android:id="@+id/idSavingProgressBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/idLLSavingItem"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginBottom="3dp"
+            android:padding="4dp"
+            android:scaleY="3"
+            android:progress="20"
+            android:clickable="false"/>
+
+        <Button
+            android:id="@+id/idSavingCompleteSavingBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/idSavingProgressBar"
+            android:text="Elköltöm"
+            />
+
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

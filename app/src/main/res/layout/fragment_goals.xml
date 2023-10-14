@@ -1,16 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/backgrnd"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Goals">
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:id="@+id/idSavingLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/backgrnd">
+
+        <TextView
+            android:id="@+id/idMainBalanceText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Megtakarításom"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:textSize="40dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/backgrnd"
+            android:layout_gravity="fill">
+            <TextView
+                android:id="@+id/idSavingAvailable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="404 Ft"
+                android:textSize="32sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
 
     <TextView
+        android:id="@+id/idTextGoal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textColor="@color/black"
-        android:text="to be developed" />
+        android:text="Céljaim"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:layout_below="@id/idSavingLayout"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"/>
 
-</FrameLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/idSavingRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/idTextGoal"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="65dp"
+        tools:listitem="@layout/saving_rv_item"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/idSavingAddBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="4dp"
+        android:src="@drawable/ic_add"
+        android:backgroundTint="@color/blue_dark"
+        />
+
+
+
+</RelativeLayout>

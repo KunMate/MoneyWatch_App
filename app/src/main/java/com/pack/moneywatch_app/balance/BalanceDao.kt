@@ -14,6 +14,9 @@ interface BalanceDao {
     @Query("SELECT * FROM expenses WHERE category = :selectedCategory order by id desc")
     fun getCategoryType(selectedCategory : String) : List<BalanceTransaction>
 
+    @Query("SELECT SUM(amount) FROM EXPENSES WHERE category = :saving" )
+    fun getSavingBalance(saving: String = "Megtakarítás") : Int
+
     @Insert
     fun insertAll(vararg transaction: BalanceTransaction)
 
@@ -22,4 +25,5 @@ interface BalanceDao {
 
     @Update
     fun update(vararg transaction: BalanceTransaction)
+
 }

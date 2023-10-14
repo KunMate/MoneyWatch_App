@@ -116,7 +116,7 @@
     </com.google.android.material.card.MaterialCardView>
 
     <TextView
-        android:id="@+id/idTextLatestActions"
+        android:id="@+id/idTextGoal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Legutóbbi mozgások"
@@ -130,11 +130,12 @@
         android:id="@+id/idBalanceRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/idTextLatestActions"
+        android:layout_below="@id/idTextGoal"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="65dp" />
+        android:layout_marginBottom="65dp"
+        tools:listitem="@layout/transaction_layout"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/idBalanceAddTransactionBtn"
