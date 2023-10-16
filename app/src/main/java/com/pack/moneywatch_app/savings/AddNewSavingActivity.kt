@@ -1,4 +1,4 @@
-package com.pack.moneywatch_app.balance
+package com.pack.moneywatch_app.savings
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

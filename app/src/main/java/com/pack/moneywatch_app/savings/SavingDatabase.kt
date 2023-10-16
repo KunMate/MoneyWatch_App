@@ -1,4 +1,4 @@
-package com.pack.moneywatch_app.balance
+package com.pack.moneywatch_app.savings
 
 import android.content.Context
 import androidx.room.Database

@@ -1,4 +1,4 @@
-package com.pack.moneywatch_app.balance
+package com.pack.moneywatch_app.savings
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -6,6 +6,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
+import com.pack.moneywatch_app.savings.SavingGoal
 
 @Dao
 interface SavingDao {

@@ -1,4 +1,4 @@
-package com.pack.moneywatch_app.balance
+package com.pack.moneywatch_app.savings
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

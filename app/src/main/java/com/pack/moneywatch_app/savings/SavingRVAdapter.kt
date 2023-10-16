@@ -1,13 +1,10 @@
-package com.pack.moneywatch_app.balance
+package com.pack.moneywatch_app.savings
 
-import android.app.Dialog
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Room
 import com.pack.moneywatch_app.R
 
 class SavingRVAdapter(

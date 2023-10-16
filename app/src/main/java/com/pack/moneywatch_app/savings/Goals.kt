@@ -1,4 +1,4 @@
-package com.pack.moneywatch_app.balance
+package com.pack.moneywatch_app.savings
 
 import android.app.Activity
 import android.app.Dialog
@@ -10,16 +10,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.pack.moneywatch_app.R
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import com.pack.moneywatch_app.balance.BalanceDatabase
+import com.pack.moneywatch_app.balance.BalanceTransaction
 
 
 class Goals : Fragment(), SavingRVAdapter.SavingItemClickInterface {

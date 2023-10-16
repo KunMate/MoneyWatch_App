@@ -1,6 +1,5 @@
-package com.pack.moneywatch_app.balance
+package com.pack.moneywatch_app.savings
 
-import android.provider.Settings.Global
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
