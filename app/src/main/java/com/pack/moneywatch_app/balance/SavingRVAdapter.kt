@@ -1,5 +1,6 @@
 package com.pack.moneywatch_app.balance
 
+import android.app.Dialog
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +27,7 @@ class SavingRVAdapter(
     interface SavingItemClickInterface {
         fun onItemClick(savingGoal: SavingGoal)
         fun getRatio(savingGoal: SavingGoal) : Int
+        fun savingFinish(savingGoal: SavingGoal)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SavingViewHolder {
@@ -49,8 +51,7 @@ class SavingRVAdapter(
                 Toast.makeText(context, "Nincs még elegendő megtakarítás", Toast.LENGTH_SHORT).show()
             }
             else {
-                val intent = Intent(context, SavingFinishActivity::class.java)
-                context.startActivity(intent)
+                savingItemClickInterface.savingFinish(list[position])
             }
         }
     }

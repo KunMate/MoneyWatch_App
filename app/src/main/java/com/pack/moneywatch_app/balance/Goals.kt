@@ -1,12 +1,14 @@
 package com.pack.moneywatch_app.balance
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.FragmentTransaction
@@ -59,8 +61,7 @@ class Goals : Fragment(), SavingRVAdapter.SavingItemClickInterface {
             BalanceDatabase::class.java,
             "transactions"
         ).allowMainThreadQueries().build()
-        val sum = -1 * balancedb.transactionDao().getSavingBalance()
-        savingAvailable.text = sum.toString() + " Ft"
+        updateSavingBalance()
         addGoal.setOnClickListener{
             val intent = Intent(requireContext(), AddNewSavingActivity::class.java)
             startActivityForResult(intent, 10)
@@ -81,6 +82,36 @@ class Goals : Fragment(), SavingRVAdapter.SavingItemClickInterface {
             100
         else
             value
+    }
+
+    override fun savingFinish(savingGoal: SavingGoal) {
+        goalsItemRV.layoutManager = LinearLayoutManager(requireContext())
+        goalsItemRV.adapter = savingRVAdapter
+        val savingRepository = SavingRepository(SavingDatabase(requireContext()))
+        val factory = SavingViewModelFactory(savingRepository)
+        savingViewModel = ViewModelProvider(this,factory)[SavingViewModel::class.java]
+        val dialog = Dialog(requireContext())
+        dialog.setContentView(R.layout.goals_finish_dialog)
+        val buttonYes = dialog.findViewById<Button>(R.id.idSavingFinishYes)
+        val buttonNo = dialog.findViewById<Button>(R.id.idSavingFinishNo)
+        buttonNo.setOnClickListener{
+            dialog.dismiss()
+        }
+        buttonYes.setOnClickListener{
+            val goal = BalanceTransaction(0, "cél teljesítés", -1*savingGoal.itemPrice, "egyéb", "")
+            val savingBack = BalanceTransaction(0, savingGoal.itemName + " (levont cél)", savingGoal.itemPrice, "Megtakarítás", "")
+            balancedb.transactionDao().insertAll(savingBack)
+            balancedb.transactionDao().insertAll(goal)
+            savingViewModel.delete(savingGoal)
+            updateSavingBalance()
+            dialog.dismiss()
+        }
+        dialog.show()
+    }
+
+    fun updateSavingBalance(){
+        val sum = -1 * balancedb.transactionDao().getSavingBalance()
+        savingAvailable.text = sum.toString() + " Ft"
     }
 
     @Deprecated("Deprecated in Java")

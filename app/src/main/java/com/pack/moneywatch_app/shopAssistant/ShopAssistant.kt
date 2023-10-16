@@ -163,8 +163,6 @@ class ShopAssistant : Fragment(), ShopListRVAdapter.ShopListItemClickInterface {
             val itemPrice: String = itemPriceEdt.text.toString()
             val itemQuantity: String = itemQuantityEdt.text.toString()
             try {
-                val qty: Float = itemQuantity.toFloat()
-                val pr: Int = itemPrice.toInt()
                 if (itemName.isNotEmpty()) {
                     shopListItems.itemName = itemName
                     shopListItems.itemPrice = itemPrice.toInt()

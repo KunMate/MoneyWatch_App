@@ -8,8 +8,8 @@ import androidx.room.Update
 
 @Dao
 interface BalanceDao {
-    @Query("SELECT * FROM expenses order by id desc")
-    fun getAll(): List<BalanceTransaction>
+    @Query("SELECT * FROM expenses WHERE NOT category = :categorySorted order by id desc")
+    fun getAll(categorySorted: String = "egyéb"): List<BalanceTransaction>
 
     @Query("SELECT * FROM expenses WHERE category = :selectedCategory order by id desc")
     fun getCategoryType(selectedCategory : String) : List<BalanceTransaction>
