@@ -50,8 +50,9 @@
 
         </LinearLayout>
 
-        <SeekBar
+        <ProgressBar
             android:id="@+id/idSavingProgressBar"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/idLLSavingItem"
@@ -62,7 +63,7 @@
             android:padding="4dp"
             android:scaleY="3"
             android:progress="20"
-            android:clickable="false"/>
+            />
 
         <Button
             android:id="@+id/idSavingCompleteSavingBtn"

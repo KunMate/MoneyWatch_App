@@ -31,6 +31,7 @@ class ShopListRVAdapter (var list: List<ShopListItems>,
 
     interface ShopListItemClickInterface{
         fun onItemClick(shopListItems: ShopListItems)
+        fun loadItem(shopListItems: ShopListItems)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup,
@@ -48,6 +49,9 @@ class ShopListRVAdapter (var list: List<ShopListItems>,
         holder.amountTV.text = itemTotal.toString()
         holder.deleteTV.setOnClickListener{
             shopListItemClickInterface.onItemClick(list[position])
+        }
+        holder.itemView.setOnClickListener{
+            shopListItemClickInterface.loadItem(list[position])
         }
     }
 

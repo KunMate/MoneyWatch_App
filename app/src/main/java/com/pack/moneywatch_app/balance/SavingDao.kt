@@ -9,7 +9,7 @@ import androidx.room.Update
 
 @Dao
 interface SavingDao {
-    @Query("SELECT * FROM savings")
+    @Query("SELECT * FROM savings ORDER BY itemPrice desc")
     fun getAllSavings() : LiveData<List<SavingGoal>>
     @Insert
     fun insert(vararg savingGoal: SavingGoal)
@@ -19,4 +19,5 @@ interface SavingDao {
 
     @Update
     fun update(vararg savingGoal: SavingGoal)
+
 }

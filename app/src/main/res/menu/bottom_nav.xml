@@ -3,11 +3,14 @@
 
     <item android:title="Egyenleg"
         android:id="@+id/balance"
-        android:icon="@drawable/ic_baseline_account_balance_wallet_24"/>
+        android:icon="@drawable/ic_baseline_account_balance_wallet_24"
+        android:iconTint="@color/white"/>
     <item android:title="Célok"
         android:id="@+id/goals"
-        android:icon="@drawable/ic_baseline_goals"/>
+        android:icon="@drawable/ic_baseline_goals"
+        android:iconTint="@color/white"/>
     <item android:title="Bevásárlás"
         android:id="@+id/shopassistant"
-        android:icon="@drawable/ic_baseline_shopping"/>
+        android:icon="@drawable/ic_baseline_shopping"
+        android:iconTint="@color/white"/>
 </menu>

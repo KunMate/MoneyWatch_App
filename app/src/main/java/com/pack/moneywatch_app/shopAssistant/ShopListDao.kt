@@ -11,6 +11,9 @@ interface ShopListDao {
     @Delete
     suspend fun delete(item: ShopListItems)
 
+    @Update
+    suspend fun update(item : ShopListItems)
+
     @Query("SELECT * FROM shoplist_items")
     fun getAllShopItems() : LiveData<List<ShopListItems>>
 

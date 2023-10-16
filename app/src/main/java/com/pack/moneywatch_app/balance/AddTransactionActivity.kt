@@ -20,7 +20,6 @@ class AddTransactionActivity : AppCompatActivity() {
     private lateinit var captionText : EditText
     private lateinit var moneyTypeSwitch: SwitchCompat
     private var startedFromShopList : Boolean = false
-    private lateinit var shopListViewModel: ShopListViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
@@ -34,7 +33,7 @@ class AddTransactionActivity : AppCompatActivity() {
         captionText = findViewById(R.id.idDescriptionInput)
         moneyTypeSwitch = findViewById(R.id.idAddMoneySwitch)
         val adapter =
-            ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, categories)
+            ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, categories)
         try {
             val cost = intent.getSerializableExtra("cost") as Int
             amountInput.setText(cost.toString())

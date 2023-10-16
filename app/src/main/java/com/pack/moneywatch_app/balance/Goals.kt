@@ -1,26 +1,30 @@
 package com.pack.moneywatch_app.balance
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.lifecycle.Observer
+import android.widget.Toast
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.pack.moneywatch_app.R
-import org.w3c.dom.Text
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 class Goals : Fragment(), SavingRVAdapter.SavingItemClickInterface {
 
     lateinit var goalsItemRV : RecyclerView
     lateinit var addGoal : FloatingActionButton
-    lateinit var list : List<SavingGoal>
+    lateinit var savings : List<SavingGoal>
     lateinit var savingRVAdapter: SavingRVAdapter
     lateinit var savingViewModel: SavingViewModel
     lateinit var balancedb: BalanceDatabase
@@ -37,8 +41,8 @@ class Goals : Fragment(), SavingRVAdapter.SavingItemClickInterface {
         super.onViewCreated(view, savedInstanceState)
         goalsItemRV = view.findViewById(R.id.idSavingRecycler)
         addGoal = view.findViewById(R.id.idSavingAddBtn)
-        list = ArrayList()
-        savingRVAdapter = SavingRVAdapter(list, this)
+        savings = ArrayList()
+        savingRVAdapter = SavingRVAdapter(savings, this)
         savingAvailable = view.findViewById(R.id.idSavingAvailable)
         goalsItemRV.layoutManager = LinearLayoutManager(requireContext())
         goalsItemRV.adapter = savingRVAdapter
@@ -49,6 +53,7 @@ class Goals : Fragment(), SavingRVAdapter.SavingItemClickInterface {
             savingRVAdapter.list = it
             savingRVAdapter.notifyDataSetChanged()
         }
+
         balancedb = Room.databaseBuilder(
             requireContext(),
             BalanceDatabase::class.java,
@@ -56,11 +61,38 @@ class Goals : Fragment(), SavingRVAdapter.SavingItemClickInterface {
         ).allowMainThreadQueries().build()
         val sum = -1 * balancedb.transactionDao().getSavingBalance()
         savingAvailable.text = sum.toString() + " Ft"
-
+        addGoal.setOnClickListener{
+            val intent = Intent(requireContext(), AddNewSavingActivity::class.java)
+            startActivityForResult(intent, 10)
+        }
     }
 
     override fun onItemClick(savingGoal: SavingGoal) {
-
+        val savingRepository = SavingRepository(SavingDatabase(requireContext()))
+        val factory = SavingViewModelFactory(savingRepository)
+        savingViewModel = ViewModelProvider(this,factory)[SavingViewModel::class.java]
+        savingViewModel.delete(savingGoal)
     }
 
+    override fun getRatio(savingGoal: SavingGoal): Int {
+        val sum = -1 * balancedb.transactionDao().getSavingBalance()
+        val value : Int = ((sum.toString().toFloat() / savingGoal.itemPrice) * 100).toInt()
+        return if (value > 100)
+            100
+        else
+            value
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(resultCode == Activity.RESULT_OK && requestCode == 10){
+            val savingRepository = SavingRepository(SavingDatabase(requireContext()))
+            val factory = SavingViewModelFactory(savingRepository)
+            savingViewModel = ViewModelProvider(this,factory)[SavingViewModel::class.java]
+            savingViewModel.getAllItems().observe(viewLifecycleOwner){
+                savingRVAdapter.list = it
+                savingRVAdapter.notifyDataSetChanged()
+            }
+        }
+    }
 }

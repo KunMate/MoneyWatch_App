@@ -47,7 +47,8 @@
                 android:gravity="end"
                 android:spinnerMode="dropdown"
                 android:layout_weight="0.1"
-                android:layout_marginLeft="50dp"/>
+                android:layout_marginLeft="50dp"
+                android:popupBackground="@color/backgrnd"/>
         </LinearLayout>
 
     </LinearLayout>

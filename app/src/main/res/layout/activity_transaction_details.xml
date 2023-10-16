@@ -105,7 +105,8 @@
             android:padding="10dp"
             android:spinnerMode="dropdown"
             android:textColorHint="@color/white"
-            android:textSize="32sp" />
+            android:textSize="32sp"
+            android:popupBackground="@color/backgrnd"/>
 
 
         <com.google.android.material.textfield.TextInputLayout

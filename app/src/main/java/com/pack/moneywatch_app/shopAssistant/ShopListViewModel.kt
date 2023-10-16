@@ -11,6 +11,9 @@ class ShopListViewModel(private val repository: ShopListRepository) : ViewModel(
     fun delete(items: ShopListItems) = GlobalScope.launch {
         repository.delete(items)
     }
+    fun update(items : ShopListItems) = GlobalScope.launch {
+        repository.update(items)
+    }
     fun getAllShopListItems() = repository.getAllItems()
     fun getTotalCost() = repository.getTotalCost()
     fun getItemCount() = repository.getItemsCount()

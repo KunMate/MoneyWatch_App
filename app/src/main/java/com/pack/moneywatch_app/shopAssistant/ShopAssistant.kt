@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -137,6 +138,52 @@ class ShopAssistant : Fragment(), ShopListRVAdapter.ShopListItemClickInterface {
         Toast.makeText(requireContext(), "Termék eltávolítva", Toast.LENGTH_SHORT).show()
     }
 
+    override fun loadItem(shopListItems: ShopListItems) {
+        shopItemsRV.layoutManager = LinearLayoutManager(context)
+        shopItemsRV.adapter = shopListRVAdapter
+        val shopListRepository = ShopListRepository(ShopListDatabase.invoke(requireContext()))
+        val factory = ShopListViewModelFactory(shopListRepository)
+        shopListViewModel = ViewModelProvider(this, factory)[ShopListViewModel::class.java]
+        val dialog = Dialog(requireContext())
+        dialog.setContentView(R.layout.shoplist_add_dialog)
+        val cancelBtn = dialog.findViewById<Button>(R.id.idBtnCancel)
+        val addBtn = dialog.findViewById<Button>(R.id.idBtnAdd)
+        val itemEdt = dialog.findViewById<EditText>(R.id.idEditItemName)
+        val itemPriceEdt = dialog.findViewById<EditText>(R.id.idEditItemPrice)
+        val itemQuantityEdt = dialog.findViewById<EditText>(R.id.idEditItemAmount)
+        itemEdt.setText(shopListItems.itemName)
+        itemPriceEdt.setText(shopListItems.itemPrice.toString())
+        itemQuantityEdt.setText(shopListItems.itemAmount.toString())
+        addBtn.setText("Frissítés")
+        cancelBtn.setOnClickListener {
+            dialog.dismiss()
+        }
+        addBtn.setOnClickListener {
+            val itemName: String = itemEdt.text.toString()
+            val itemPrice: String = itemPriceEdt.text.toString()
+            val itemQuantity: String = itemQuantityEdt.text.toString()
+            try {
+                val qty: Float = itemQuantity.toFloat()
+                val pr: Int = itemPrice.toInt()
+                if (itemName.isNotEmpty()) {
+                    shopListItems.itemName = itemName
+                    shopListItems.itemPrice = itemPrice.toInt()
+                    shopListItems.itemAmount =  itemQuantity.toFloat()
+                    shopListViewModel.update(shopListItems)
+                    Toast.makeText(requireContext(), "Termék frissítve", Toast.LENGTH_SHORT).show()
+                    shopListRVAdapter.notifyDataSetChanged()
+                    updateSum()
+                    dialog.dismiss()
+                } else {
+                    Toast.makeText(requireContext(), "Nincs elég adat", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: NumberFormatException) {
+                Toast.makeText(requireContext(), "Rossz szám adat", Toast.LENGTH_SHORT).show()
+            }
+        }
+        dialog.show()
+    }
+
     fun updateSum(){
         val sum : Int
         if(shopListViewModel.getItemCount() == 0)
@@ -147,7 +194,7 @@ class ShopAssistant : Fragment(), ShopListRVAdapter.ShopListItemClickInterface {
             sum = shopListViewModel.getTotalCost().toFloat().roundToInt()
         shopSum.text = sum.toString() + " Ft"
     }
-    fun getSum() : Int{
+    private fun getSum() : Int{
         val sum : Int
         if(shopListViewModel.getItemCount() == 0)
         {
