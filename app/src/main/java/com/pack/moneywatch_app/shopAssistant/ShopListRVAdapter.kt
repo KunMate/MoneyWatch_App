@@ -44,9 +44,9 @@ class ShopListRVAdapter (var list: List<ShopListItems>,
     override fun onBindViewHolder(holder: ShopListViewHolder, position: Int) {
         holder.nameTV.text = list[position].itemName
         holder.quantityTV.text = list[position].itemAmount.toString()
-        holder.priceTV.text = list[position].itemPrice.toString()
+        holder.priceTV.text = list[position].itemPrice.toString() + " Ft"
         val itemTotal : Int = (list[position].itemPrice * list[position].itemAmount).roundToInt()
-        holder.amountTV.text = itemTotal.toString()
+        holder.amountTV.text = itemTotal.toString() + " Ft"
         holder.deleteTV.setOnClickListener{
             shopListItemClickInterface.onItemClick(list[position])
         }

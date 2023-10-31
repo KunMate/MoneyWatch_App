@@ -36,7 +36,7 @@ class SavingRVAdapter(
     override fun onBindViewHolder(holder: SavingViewHolder, position: Int) {
         val context = holder.completeSaving.context
         holder.savingName.text = list[position].itemName
-        holder.itemCost.text = list[position].itemPrice.toString()
+        holder.itemCost.text = list[position].itemPrice.toString() + " Ft"
         holder.deleteBtn.setOnClickListener {
             savingItemClickInterface.onItemClick(list[position])
         }
